@@ -1,0 +1,13 @@
+
+# System files
+.DS_Store
+.idea
+parse-credentials.json
+logs
+
+# Testing
+coverage
+npm-debug.log
+
+# Modules managed by NPM
+node_modules

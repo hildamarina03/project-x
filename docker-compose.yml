@@ -1,0 +1,26 @@
+version: '2'
+
+services:
+  project-x:
+    build: .
+    environment:
+      PORT: 6600
+      DATABASE_URI: $DATABASE_URI
+    links:
+          - mongo
+    volumes:
+      - ./src:/app/src
+    ports:
+      - 6600:6600
+    command: "nodemon src/app.js -L"
+
+  mongo:
+      image: mongo
+      ports:
+        - 27017:27017
+      command: "--smallfiles  --setParameter failIndexKeyTooLong=false"
+
+networks:
+  default:
+    external:
+      name: development

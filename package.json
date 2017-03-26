@@ -1,0 +1,34 @@
+{
+  "name": "project-x",
+  "version": "1.2.0",
+  "description": "Project X",
+  "main": "src/app.js",
+  "scripts": {
+    "start": "node src/app.js",
+    "test-xunit": "mocha -R xunit $(find src/ -name '*.spec.js')",
+    "test": "mocha $(find src/ -name '*.spec.js')",
+    "test:integration": "node test/init.js",
+    "release:major": "npm version major && git push --follow-tags",
+    "release:minor": "npm version minor && git push --follow-tags",
+    "release:patch": "npm version patch && git push --follow-tags",
+    "tag:latest": "git push origin :refs/tags/latest && git tag -fa latest -m 'latest' && git push -f origin master --tags",
+    "coverage": "istanbul cover _mocha -- -R spec $(find src/ -name '*.spec.js')",
+    "documentation": "apidoc -i src/routes/ -o apidoc/",
+    "coverage-cobertura": "istanbul cover --report=cobertura _mocha -- -R min $(find src/ -name '*.spec.js')"
+  },
+  "author": "Hilda Marina López",
+  "license": "ISC",
+  "homepage": "",
+  "dependencies": {
+    "body-parser": "^1.15.0",
+    "express": "^4.13.4",
+    "moment": "^2.13.0",
+    "moment-timezone": "^0.5.4",
+    "mongodb": "^2.2.1",
+    "winston": "^2.2.0"
+  },
+  "apidoc": {
+    "title": "Project X API",
+    "url": "https://localhost:6600"
+  }
+}

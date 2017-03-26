@@ -1,0 +1,4 @@
+apps:
+  - script: 'src/app.js'
+    exec_mode: 'cluster'
+    instances: 4
