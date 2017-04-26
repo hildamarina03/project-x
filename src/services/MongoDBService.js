@@ -1,8 +1,78 @@
 'use strict';
 
 const mongo = require('../mongo');
+const ObjectID = require('mongodb').ObjectID;
 
 class MongoDBService {
+
+  insertItem(entity, item) {
+    return new Promise((resolve, reject) => {
+      const db = mongo.get();
+
+      db.collection(entity).insert(item, (err, item) => {
+        if(err){
+          reject(err);
+        }else{
+          resolve(item.ops[0]._id);
+        }
+      });
+    });
+  }
+
+  findOneById(entity, id) {
+    return new Promise((resolve, reject) => {
+      const db = mongo.get();
+
+      db.collection(entity).findOne({
+        _id: new ObjectID(id),
+      }).then(item => {
+        if (item) {
+          resolve(item);
+        }else{
+          reject(`No object (${entity}) found`);
+        }
+      });
+    });
+  }
+
+  editItem(entity, id, item) {
+    return new Promise((resolve, reject) => {
+      const db = mongo.get();
+
+      db.collection(entity).update({
+        _id: new ObjectID(id),
+      }, item, (err, item) => {
+        if(err){
+          reject(err);
+        }else{
+          resolve(id);
+        }
+      });
+    });
+  }
+
+  findAll(entity) {
+    return new Promise(resolve => {
+      const db = mongo.get();
+
+      db.collection(entity).find({}).toArray().then(items => {
+        resolve(items);
+      });
+    });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+  //-------------------------------------------------delete when done
 
   addCollection() {
     return new Promise((resolve, reject) => {
@@ -42,38 +112,11 @@ class MongoDBService {
 
 
 
-  /**
-   * @param entity
-   * @param id
-   */
-  findOneById(entity, id) {
-    return new Promise((resolve, reject) => {
-      const db = mongo.get();
-
-      db.collection(entity).findOne({
-        _id: id
-      }).then(item => {
-        if (item) {
-          resolve(item);
-        }else{
-          reject(`No object (${entity}) found`);
-        }
-      });
-    });
-  }
 
   /**
    * @param entity
    */
-  findAll(entity) {
-    return new Promise(resolve => {
-      const db = mongo.get();
 
-      db.collection(entity).find({}).toArray().then(items => {
-        resolve(items);
-      });
-    });
-  }
 
   /**
    *

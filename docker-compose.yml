@@ -15,7 +15,7 @@ services:
     command: "nodemon src/app.js -L"
 
   mongo:
-      image: mongo
+      image: mongo:3.0
       ports:
         - 27017:27017
       command: "--smallfiles  --setParameter failIndexKeyTooLong=false"
