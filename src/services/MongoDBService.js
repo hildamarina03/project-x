@@ -2,6 +2,8 @@
 
 const mongo = require('../mongo');
 const ObjectID = require('mongodb').ObjectID;
+const logger = require('../logger');
+
 
 class MongoDBService {
 
@@ -35,6 +37,22 @@ class MongoDBService {
     });
   }
 
+  findOneByTitle(entity, title) {
+    return new Promise((resolve, reject) => {
+      const db = mongo.get();
+
+      db.collection(entity).findOne({
+        title: title,
+      }).then(item => {
+        if (item) {
+          resolve(item);
+        }else{
+          reject(`No object (${entity}) found`);
+        }
+      });
+    });
+  }
+
   editItem(entity, id, item) {
     return new Promise((resolve, reject) => {
       const db = mongo.get();
@@ -56,6 +74,18 @@ class MongoDBService {
       const db = mongo.get();
 
       db.collection(entity).find({}).toArray().then(items => {
+        resolve(items);
+      });
+    });
+  }
+
+  findAllByTripId(entity, tripId) {
+    return new Promise(resolve => {
+      const db = mongo.get();
+
+      db.collection(entity).find({
+        tripId: tripId
+      }).toArray().then(items => {
         resolve(items);
       });
     });

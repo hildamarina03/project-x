@@ -188,6 +188,27 @@ class ProjectXHandler {
       });
     });
   }
+
+  getTripItems(req, res) {
+    const
+      tripId = req.params.tripId;
+
+    ItemService.getItemsByTripId(tripId).then(result => {
+      console.log('getTripItems', result);
+      res.json({
+        success: {
+          objectType: 'item',
+          objects: result
+        }
+      });
+    }, error => {
+      res.status(400).json({
+        error: error
+      });
+    });
+
+  }
+
 }
 
 module.exports = ProjectXHandler;

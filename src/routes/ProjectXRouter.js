@@ -14,8 +14,12 @@ router
   .get(handler.helloWorld);
 
 router
-  .route('/functions/create/:entity')
+  .route('/functions/create/:entity'           )
   .post(handler.newItem);
+
+router
+  .route('/functions/get/items/:tripId')
+  .get(handler.getTripItems);
 
 router
   .route('/functions/get/:entity/:id')

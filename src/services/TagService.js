@@ -2,7 +2,10 @@
 
 const MongoDBService = require('./MongoDBService');
 const CheckService = require('./CheckService');
+const logger = require('../logger');
 
+
+const formatTag = (tag) => { return tag.toLowerCase(); };
 
 class TagService {
 
@@ -10,12 +13,48 @@ class TagService {
     return CheckService.checkString(params.title)
   }
 
+  createTags(tags) {
+    logger.verbose('TagService - createTags', arguments);
+    if(typeof tags !== 'undefined' && tags.length > 0) {
+      let promises = [];
+      tags.forEach(tag => {
+        promises.push(this.findOrSaveTag(tag))
+      });
+
+      return Promise.all(promises);
+    }
+    return [];
+  }
+
+  findOrSaveTag(tagTitle) {
+    logger.verbose('TagService - findOrSaveTag', arguments);
+    return new Promise((resolve, reject) => {
+      this.findTagByTitle(tagTitle).then(result => {
+        resolve(result.title);
+      }, () => {
+        this.createTag({title: formatTag(tagTitle)}).then(()  => {
+          resolve(formatTag(tagTitle));
+        }, error => {
+          reject(error);
+        });
+      });
+    });
+
+  }
+
   createTag(params) {
+    logger.verbose('TagService - createTag', arguments);
     return this.checkParams(params)
-      .then(() => MongoDBService.insertTag("Tag", {
+      .then(() => MongoDBService.insertItem("Tag", {
         title: params.title,
         active: true
       }))
+  }
+
+  findTagByTitle(title) {
+    logger.verbose('TagService - findTagByTitle', arguments);
+    return CheckService.checkString(title)
+      .then(() => MongoDBService.findOneByTitle("Tag", formatTag(title)))
   }
 
   getTag(id) {
