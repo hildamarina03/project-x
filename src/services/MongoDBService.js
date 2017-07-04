@@ -63,7 +63,7 @@ class MongoDBService {
         if (item) {
           resolve(item);
         }else{
-          reject(`No object (${entity}) found`);
+          reject('Invalid username or password');
         }
       });
     });
@@ -91,6 +91,22 @@ class MongoDBService {
 
       db.collection(entity).find({}).toArray().then(items => {
         resolve(items);
+      });
+    });
+  }
+
+  dropCollection(entity) {
+    return new Promise((resolve, reject) => {
+      const db = mongo.get();
+
+      db.collection(entity).drop(function(err, result) {
+        if (!err) {
+          console.log('DROPPED', entity, result);
+          resolve(result);
+        }else{
+          console.log('Error at drop', entity, err);
+          reject('Error at drop'+ entity);
+        }
       });
     });
   }
@@ -131,7 +147,7 @@ class MongoDBService {
   findAllByItemId(entity, itemId, params) {
     return new Promise(resolve => {
       const db = mongo.get();
-      const sort = params.sortBy || '_id';
+      const sort = params.sortBy || 'startDate';
 
       db.collection(entity).find({
         itemId: itemId
@@ -157,6 +173,10 @@ class MongoDBService {
       });
     });
   }
+
 }
 
 module.exports = new MongoDBService();
+
+
+

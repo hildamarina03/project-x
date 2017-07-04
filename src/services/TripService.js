@@ -9,7 +9,7 @@ const logger = require('../logger');
 const view = (trip) => {
   let x;
   return {
-    _id: trip._id,
+    id: trip._id,
     location: trip.location || x,
     title: trip.title || x,
     imageURL: trip.imageURL || x,
@@ -63,9 +63,9 @@ class TripService {
   editTrip(params) {
     logger.verbose('TripService - editTrip', arguments);
     return this.checkParams(params)
-      .then(() => CheckService.checkString(params._id, "_id", required))
+      .then(() => CheckService.checkString(params.id, "id", required))
       .then(() => TagService.createTags(params.tags))
-      .then(tags =>  MongoDBService.editItem("Trip", params._id, {
+      .then(tags =>  MongoDBService.editItem("Trip", params.id, {
         location: params.location,
         userId: params.userId,
         title: params.title,
@@ -82,7 +82,7 @@ class TripService {
       .then(() => this.getTrip(id))
       .then(trip => {
         trip.active = false;
-        MongoDBService.editItem("Trip", id, trip)
+        return MongoDBService.editItem("Trip", id, trip)
       })
   }
 
@@ -97,6 +97,11 @@ class TripService {
       .then(trips => {
         return trips.map(view);
       })
+  }
+
+  getTripByTitle(title) {
+    return CheckService.checkString(title, "title", required)
+      .then(() => MongoDBService.findOneByTitle("Trip", title))
   }
 
 }

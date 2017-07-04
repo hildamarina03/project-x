@@ -9,7 +9,7 @@ const logger = require('../logger');
 const view = (item) => {
   let x;
   return {
-    _id: item._id,
+    id: item._id,
     title: item.title || x,
     description: item.description || x,
     location: item.location || x,
@@ -90,11 +90,11 @@ class ItemService {
   editItem(params) {
     logger.verbose('ItemService - editItem', arguments)
     return this.checkParams(params)
-      .then(() => CheckService.checkString(params._id, "_id", required))
+      .then(() => CheckService.checkString(params.id, "id", required))
       .then(() => TagService.createTags(params.tags))
       .then(tags => {
-        return this.getItem(params._id)
-        .then(item => MongoDBService.editItem("Item", params._id, {
+        return this.getItem(params.id)
+        .then(item => MongoDBService.editItem("Item", params.id, {
           title: params.title,
           userId: params.userId,
           tripId: params.tripId,
@@ -120,7 +120,7 @@ class ItemService {
       .then(() => this.getItem(id))
       .then(item => {
         item.active = false;
-        MongoDBService.editItem("Item", id, item)
+        return MongoDBService.editItem("Item", id, item)
       })
   }
 
@@ -131,7 +131,7 @@ class ItemService {
       .then(item => {
         item.numberOfComments = item.numberOfComments || 0;
         item.numberOfComments = item.numberOfComments + 1;
-        MongoDBService.editItem("Item", id, item)
+        return MongoDBService.editItem("Item", id, item)
       })
   }
 
@@ -142,7 +142,7 @@ class ItemService {
       .then(item => {
         item.numberOfLikes = item.numberOfLikes || 0;
         item.numberOfLikes = item.numberOfLikes + 1;
-        MongoDBService.editItem("Item", id, item)
+        return MongoDBService.editItem("Item", id, item)
       })
   }
 

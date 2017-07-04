@@ -46,6 +46,10 @@ class CommentService {
       })
   }
 
+  listAllComments() {
+    return MongoDBService.findAll("Comment")
+  }
+
 }
 
 module.exports = new CommentService();

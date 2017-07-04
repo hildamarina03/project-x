@@ -64,8 +64,8 @@ class TagService {
 
   editTag(params) {
     return this.checkParams(params)
-      .then(() => CheckService.checkString(params._id))
-      .then(() => MongoDBService.editTag("Tag", params._id, {
+      .then(() => CheckService.checkString(params.id))
+      .then(() => MongoDBService.editTag("Tag", params.id, {
         title: params.title,
         active: true
       }))

@@ -39,6 +39,10 @@ class LikeService {
     return MongoDBService.doILikeIt("Like", itemId, userId)
   }
 
+  listAllLikes() {
+    return MongoDBService.findAll("Like")
+  }
+
 }
 
 module.exports = new LikeService();

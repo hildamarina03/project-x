@@ -30,6 +30,10 @@ router
   .post(handler.getUserByEmail);
 
 router
+  .route('/functions/gettrip')
+  .post(handler.getTripByTitle);
+
+router
   .route('/functions/get/comments/:itemId')
   .get(handler.getItemComments);
 
@@ -47,6 +51,14 @@ router
 
 router
   .route('/functions/list/:entity')
-  .post(handler.listItems);
+  .get(handler.listItems);
+
+router
+  .route('/functions/login')
+  .post(handler.login);
+
+router
+  .route('/functions/drop/collection')
+  .post(handler.dropCollection);
 
 module.exports = router;

@@ -8,6 +8,7 @@ const ItemService = require('../services/ItemService');
 const CommentService = require('../services/CommentService');
 const LikeService = require('../services/LikeService');
 const HelloWorldService = require('../services/HelloWorldService');
+const MongoDBService = require('../services/MongoDBService');
 
 
 const createTrip = (params) => { return TripService.createTrip(params) };
@@ -32,10 +33,12 @@ const deleteItem = (params) => { return ItemService.softDeleteItem(params) };
 const deleteTag = (params) => { return TagService.softDeleteTag(params) };
 const deleteUser  = (params) => { return UserService.softDeleteUser(params) };
 
-const listAllTrip = (params) => { return TripService.listAllTrips(params) };
-const listAllItem = (params) => { return ItemService.listAllItems(params) };
-const listAllTag = (params) => { return TagService.listAllTags(params) };
-const listAllUser = (params) => { return UserService.listAllUsers(params) };
+const listAllTrip = () => { return TripService.listAllTrips() };
+const listAllItem = () => { return ItemService.listAllItems() };
+const listAllTag = () => { return TagService.listAllTags() };
+const listAllUser = () => { return UserService.listAllUsers() };
+const listAllComment = () => { return CommentService.listAllComments() };
+const listAllLike = () => { return LikeService.listAllLikes() };
 
 const typeService = {
   create: {
@@ -68,7 +71,9 @@ const typeService = {
     trip: listAllTrip,
     item: listAllItem,
     tag: listAllTag,
-    user: listAllUser
+    user: listAllUser,
+    comment: listAllComment,
+    like: listAllLike
   }
 };
 
@@ -177,10 +182,9 @@ class ProjectXHandler {
 
   listItems(req, res) {
     const
-      entity = req.params.entity,
-      data = req.body;
+      entity = req.params.entity;
 
-    typeService.list[entity](data).then(result => {
+    typeService.list[entity]().then(result => {
       console.log('listAllTrips result', result);
       res.json({
         success: {
@@ -267,6 +271,67 @@ class ProjectXHandler {
           objectType: 'user',
           object: result
         }
+      });
+    }, error => {
+      res.status(400).json({
+        error: error
+      });
+    });
+
+  }
+
+  getTripByTitle(req, res) {
+    const
+      tripTitle = req.body.title;
+
+    TripService.getTripByTitle(tripTitle).then(result => {
+      console.log('getTripByTitle', result);
+      res.json({
+        success: {
+          objectType: 'trip',
+          object: result
+        }
+      });
+    }, error => {
+      res.status(400).json({
+        error: error
+      });
+    });
+
+  }
+
+  login(req, res) {
+    const
+      username = req.body.username,
+      password = req.body.password;
+
+    UserService.login(username, password).then(result => {
+      if(result === 'Invalid username or password'){
+        res.status(400).json({
+          error: result
+        });
+      }
+      console.log('login', result);
+      res.json({
+        success: {
+          id: result
+        }
+      });
+    }, error => {
+      res.status(400).json({
+        error: error
+      });
+    });
+
+  }
+
+  dropCollection(req, res) {
+    const
+      entity = req.body.entity;
+      MongoDBService.dropCollection(entity).then(result => {
+      console.log('dropCollection:', entity, result);
+      res.json({
+        success: result
       });
     }, error => {
       res.status(400).json({

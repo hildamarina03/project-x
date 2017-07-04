@@ -1,0 +1,85 @@
+{
+  "results": [
+    {
+      "id": "1",
+      "location": "Barcelona, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1497284636000,
+      "tags": ["Hotel"],
+      "title": "Hotel The Starts",
+      "description": "This is a cool place to sleep",
+      "price": 1200,
+      "multipleDays": false
+    },
+
+    {
+      "id": "2",
+      "location": "Barcelona, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1497371036000,
+      "tags": ["Dinner", "Mexican", "Restaurant"],
+      "title": "Taco Starts",
+      "description": "This is a cool place to eat",
+      "price": 50,
+      "multipleDays": false
+    },
+
+    {
+      "id": "3",
+      "location": "Barcelona, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1497457436000,
+      "tags": ["tour"],
+      "title": "Sagrada Familia",
+      "description": "This is a cool place to visit",
+      "price": 15,
+      "multipleDays": false
+    },
+
+    {
+      "id": "4",
+      "location": "Barcelona, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1497543836000,
+      "tags": ["tour", "wow"],
+      "title": "La Pedrera",
+      "description": "This is a cool place to visit. Wow!",
+      "price": 25,
+      "multipleDays": false
+    },
+
+    {
+      "id": "5",
+      "location": "Barcelona, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1500222236000,
+      "tags": ["Walk", "Tour"],
+      "title": "Walking in Barcelona",
+      "description": "Guided tour of Raval, Ramlbas, Gothic and Borne",
+      "price": 250,
+      "multipleDays": false
+    },
+
+    {
+      "id": "1",
+      "location": "Barcelona, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1500827036000,
+      "tags": ["tour", "rock climbing"],
+      "title": "Montserrat",
+      "description": "Cool full day tour",
+      "price": 600,
+      "multipleDays": false
+    }
+
+]}
+
+
+
+
