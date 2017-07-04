@@ -13,13 +13,11 @@ services:
     ports:
       - 6600:6600
     command: "nodemon src/app.js -L"
-
   mongo:
       image: mongo:3.0
       ports:
         - 27017:27017
       command: "--smallfiles  --setParameter failIndexKeyTooLong=false"
-
 networks:
   default:
     external:

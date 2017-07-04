@@ -19,7 +19,15 @@ router
 
 router
   .route('/functions/get/items/:tripId')
-  .get(handler.getTripItems);
+  .post(handler.getTripItems);
+
+router
+  .route('/functions/get/trips/:userId')
+  .get(handler.getUserTrips);
+
+router
+  .route('/functions/get/comments/:itemId')
+  .get(handler.getItemComments);
 
 router
   .route('/functions/get/:entity/:id')

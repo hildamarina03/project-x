@@ -36,6 +36,22 @@ class CheckService {
     });
   };
 
+  /*
+   * TODO check if item really exists
+   * */
+  checkItem(stringParam, nameParam, isRequired) {
+    logger.verbose('CheckService - checkItem', arguments);
+    return new Promise((resolve, reject) => {
+      if((typeof stringParam !== 'undefined' && typeof stringParam === 'string')  ||
+        (!isRequired && typeof stringParam === 'undefined')
+      ) {
+        resolve();
+      } else {
+        reject('Invalid param ' + stringParam + ' ' + nameParam);
+      }
+    });
+  };
+
   checkBoolean(stringParam, nameParam, isRequired) {
     logger.verbose('CheckService - checkBoolean', arguments);
     return new Promise((resolve, reject) => {

@@ -6,7 +6,18 @@ const TagService = require('./TagService');
 const {required, notRequired } = require('.././config');
 const logger = require('../logger');
 
-
+const view = (trip) => {
+  let x;
+  return {
+    location: trip.location || x,
+    title: trip.title || x,
+    imageURL: trip.imageURL || x,
+    startDate: trip.startDate || x,
+    endDate: trip.endDate || x,
+    tags: trip.tags || x,
+    userId: trip.userId || x
+  }
+};
 
 class TripService {
 
@@ -44,23 +55,16 @@ class TripService {
     return CheckService.checkString(id)
       .then(() => MongoDBService.findOneById("Trip", id))
       .then(trip => {
-        let x;
-        return {
-          location: trip.location || x,
-          title: trip.title || x,
-          imageURL: trip.imageURL || x,
-          startDate: trip.startDate || x,
-          endDate: trip.endDate || x,
-          tags: trip.tags || x
-        }
+        return view(trip)
       })
   }
 
   editTrip(params) {
     logger.verbose('TripService - editTrip', arguments);
     return this.checkParams(params)
-      .then(() => CheckService.checkString(params._id))
-      .then(() => MongoDBService.editItem("Trip", params._id, {
+      .then(() => CheckService.checkString(params._id, "_id", required))
+      .then(() => TagService.createTags(params.tags))
+      .then(tags =>  MongoDBService.editItem("Trip", params._id, {
         location: params.location,
         userId: params.userId,
         title: params.title,
@@ -75,17 +79,25 @@ class TripService {
   softDeleteTrip(id) {
     return CheckService.checkString(id)
       .then(() => this.getTrip(id))
-      .then(trip => MongoDBService.editItem("Trip", id, {
-        destination: trip.destination,
-        description: trip.description,
-        picture: trip.picture,
-        active: false
-      }))
+      .then(trip => {
+        trip.active = false;
+        MongoDBService.editItem("Trip", id, trip)
+      })
   }
 
   listAllTrips() {
     return MongoDBService.findAll("Trip")
   }
+
+  getTripsByUserId(userId) {
+    logger.verbose('TripService - getTripsByUserId', arguments);
+    return CheckService.checkUser(userId)
+      .then(() => MongoDBService.findAllByUserId("Trip", userId))
+      .then(trips => {
+        return trips.map(view);
+      })
+  }
+
 }
 
 module.exports = new TripService();

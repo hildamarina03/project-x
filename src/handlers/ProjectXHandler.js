@@ -5,6 +5,8 @@ const TripService = require('../services/TripService');
 const TagService = require('../services/TagService');
 const UserService = require('../services/UserService');
 const ItemService = require('../services/ItemService');
+const CommentService = require('../services/CommentService');
+const LikeService = require('../services/LikeService');
 const HelloWorldService = require('../services/HelloWorldService');
 
 
@@ -12,6 +14,8 @@ const createTrip = (params) => { return TripService.createTrip(params) };
 const createItem = (params) => { return ItemService.createItem(params) };
 const createUser = (params) => { return TagService.createTag(params) };
 const createTag = (params) => { return UserService.createUser(params) };
+const createComment = (params) => { return CommentService.createComment(params) };
+const createLike = (params) => { return LikeService.createLike(params) };
 
 const getTrip = (params) => { return TripService.getTrip(params) };
 const getItem = (params) => { return ItemService.getItem(params) };
@@ -38,7 +42,9 @@ const typeService = {
     trip: createTrip,
     item: createItem,
     tag: createTag,
-    user: createUser
+    user: createUser,
+    comment: createComment,
+    like: createLike
   },
   get: {
     trip: getTrip,
@@ -191,13 +197,54 @@ class ProjectXHandler {
 
   getTripItems(req, res) {
     const
-      tripId = req.params.tripId;
+      tripId = req.params.tripId,
+      params = req.body;
 
-    ItemService.getItemsByTripId(tripId).then(result => {
+    ItemService.getItemsByTripId(tripId, params).then(result => {
       console.log('getTripItems', result);
       res.json({
         success: {
           objectType: 'item',
+          objects: result
+        }
+      });
+    }, error => {
+      res.status(400).json({
+        error: error
+      });
+    });
+
+  }
+
+  getUserTrips(req, res) {
+    const
+      userId = req.params.userId;
+
+    TripService.getTripsByUserId(userId).then(result => {
+      console.log('getTripsByUserId', result);
+      res.json({
+        success: {
+          objectType: 'trip',
+          objects: result
+        }
+      });
+    }, error => {
+      res.status(400).json({
+        error: error
+      });
+    });
+
+  }
+
+  getItemComments(req, res) {
+    const
+      itemId = req.params.itemId;
+
+    CommentService.getCommentsByItemId(itemId).then(result => {
+      console.log('getItemComments', result);
+      res.json({
+        success: {
+          objectType: 'comment',
           objects: result
         }
       });

@@ -79,180 +79,64 @@ class MongoDBService {
     });
   }
 
-  findAllByTripId(entity, tripId) {
+  findAllByTripId(entity, tripId, params) {
+    return new Promise(resolve => {
+      const sort = params.sortBy || '_id';
+      let query = {
+        tripId: tripId,
+        active: true
+      };
+
+      if(params.dateFilter){
+        query.startDate =  {"$lte":  params.dateFilter };
+        query.endDate =  {"$gte":  params.dateFilter};
+      }
+
+      const db = mongo.get();
+      db.collection(entity).find(query, { sort: sort }).toArray().then(items => {
+        resolve(items);
+      });
+    });
+  }
+
+  findAllByUserId(entity, userId) {
     return new Promise(resolve => {
       const db = mongo.get();
 
       db.collection(entity).find({
-        tripId: tripId
+        userId: userId,
+        active: true
       }).toArray().then(items => {
         resolve(items);
       });
     });
   }
 
-
-
-
-
-
-
-
-
-
-
-
-  //-------------------------------------------------delete when done
-
-  addCollection() {
-    return new Promise((resolve, reject) => {
+  findAllByItemId(entity, itemId, params) {
+    return new Promise(resolve => {
       const db = mongo.get();
+      const sort = params.sortBy || '_id';
 
-      let collection = db.collection("simple_document_insert_collection_no_safe");
-      collection.insert({hello:'world_no_safe'});
-
-      collection.findOne({hello:'world_no_safe'}, function(err, item) {
-        if(err){
-          reject(err);
-        }else{
-          resolve(item);
-        }
-
-      })
-    });
-  }
-
-  addCollectionUser() {
-    return new Promise((resolve, reject) => {
-      const db = mongo.get();
-
-      let collection = db.collection('User');
-      collection.insert({name:'Hilda', lastName: 'Lopez', email: 'hildamarina03@gmail.com', password: '1234'});
-      collection.insert({name:'Pedro', lastName: 'Delmonte', email: 'pedro.delmonte@gmail.com', password: '1234'});
-      collection.insert({name:'Roxanne', lastName: 'Rodriguez', email: 'hildamarina03@gmail.com', password: '1234'});
-      collection.insert({name:'Jeroen', lastName: 'Lopez', email: 'hildamarina03@gmail.com', password: '1234'});
-      collection.insert({name:'Carolina', lastName: 'Rodriguez', email: 'hildamarina03@gmail.com', password: '1234'});
-      collection.insert({name:'Manuel', lastName: 'Rodriguez', email: 'marp@gmail.com', password: '1234'});
-
-      collection.find({}).toArray().then(items => {
+      db.collection(entity).find({
+        itemId: itemId
+      }, { sort: sort }).toArray().then(items => {
         resolve(items);
       });
     });
   }
 
-
-
-
-  /**
-   * @param entity
-   */
-
-
-  /**
-   *
-   */
-  findLastUpdatedUser() {
-    return new Promise((resolve, reject) => {
-      const db = mongo.get();
-      db.collection('_User').findOne({type: 'company'},{ sort: [['_updated_at','desc']] }).then(user => {
-        console.log(user);
-        if(user && typeof user._id !== 'undefined'){
-          resolve(user);
-        }else{
-          reject('Problem in query for user');
-        }
-      });
-    });
-  }
-
-  /**
-   *
-   * @param userId
-   * @param dateValue
-   */
-  findUserCurrentSubscription(userId, dateValue) {
+  doILikeIt(entity, itemId, userId) {
     return new Promise(resolve => {
-
-      this.findSubscriptionByUserAndStartDate(userId, dateValue).then(subscriptions => {
-        const array = [];
-
-        subscriptions.forEach(subscription => {
-          if (this.isSubscriptionActive(subscription, dateValue)) {
-            array.push(subscription);
-          }
-        });
-
-        resolve(array);
-      });
-    });
-  }
-
-  /**
-   *
-   */
-  findContractByUser(userId) {
-    return new Promise((resolve, reject) => {
       const db = mongo.get();
 
-      db.collection('Contract').findOne({
-        user: userId
+      db.collection(entity).findOne({
+        itemId: itemId,
+        userId: userId
       }).then(item => {
-        if (item) {
-          resolve(item);
+        if (item && item._id) {
+          resolve(true);
         }else{
-          resolve({});
-        }
-      });
-    });
-  }
-
-  /**
-   * Query for entity Subscription
-   *
-   * @param userId
-   * @param dateValue
-   */
-  findSubscriptionByUserAndStartDate(userId, dateValue) {
-    return new Promise(resolve => {
-      const db = mongo.get();
-
-      db.collection('Subscription').find({
-        user: userId,
-        startDate: {
-          $lte: dateValue.toDate()
-        }
-      }, {}).toArray().then(subscriptions => {
-        resolve(subscriptions);
-      });
-    });
-  }
-
-  /**
-   * Boolean aux function used in findUserCurrentSubscription
-   *
-   * @param subscription
-   * @param dateValue
-   */
-  isSubscriptionActive(subscription, dateValue) {
-    return typeof subscription.endDate === 'undefined' || subscription.endDate >= dateValue.toDate();
-  }
-
-  /**
-   * Query for entity Counter
-   *
-   * @param accountId
-   */
-  findOneCounterByAccountId(accountId) {
-    return new Promise(resolve => {
-      const db = mongo.get();
-
-      db.collection('Counter').findOne({
-        accountId: accountId
-      }).then(item => {
-        if (item) {
-          resolve(item);
-        }else{
-          resolve({});
+          resolve(false);
         }
       });
     });
