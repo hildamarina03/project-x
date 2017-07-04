@@ -12,11 +12,17 @@ const mongo = require('./mongo');
 
 const app = express();
 
-app.use('/projectx', security);
+// app.use('/projectx', security);
 
 app.use(bodyParser.json());
 
 app.use('/apidoc', express.static('apidoc'));
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
 
 app.get('/', (req, res) => {
   res.send('Project-X is running..');
@@ -44,3 +50,4 @@ module.exports.start = () => {
 };
 
 module.exports.app = app;
+
