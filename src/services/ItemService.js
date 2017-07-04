@@ -9,6 +9,7 @@ const logger = require('../logger');
 const view = (item) => {
   let x;
   return {
+    _id: item._id,
     title: item.title || x,
     description: item.description || x,
     location: item.location || x,

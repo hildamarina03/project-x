@@ -9,6 +9,7 @@ const logger = require('../logger');
 const view = (trip) => {
   let x;
   return {
+    _id: trip._id,
     location: trip.location || x,
     title: trip.title || x,
     imageURL: trip.imageURL || x,
