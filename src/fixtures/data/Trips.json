@@ -1,0 +1,42 @@
+{
+  "results": [
+    {
+      "id": "1",
+      "location": "Barcelona, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "title": "BTS Graduation Trip",
+      "imageURL": "http://sc2.emgcdn.net/assets/es/logos/centro/id/181400/size/m.png",
+      "startDate": 1497284636000,
+      "endDate": 1498407836000,
+      "tags": ["Graduation", "Bar", "Party", "Friends"]
+    },
+    {
+      "id": "2",
+      "location": "Madrid, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "title": "Lopez Family Christmas 2017",
+      "imageURL": "https://i.ytimg.com/vi/-wybmi7sRKI/maxresdefault.jpg",
+      "startDate": 1513787036000,
+      "endDate": 1514910236000,
+      "tags": ["Cultural", "Friends" ]
+    },
+
+    {
+      "id": "3",
+      "location": "Lerida, Spain",
+      "userEmail": "roxanne@tripquest.com",
+      "title": "Romantic Getaway",
+      "startDate": 1497284636000,
+      "endDate": 1498407836000,
+      "tags": ["Couple", "Love", "Sex", "Friends"]
+    },
+    {
+      "id": "4",
+      "location": "Oviedo, Spain",
+      "userEmail": "carolina@tripquest.com",
+      "title": "Beach with friends",
+      "startDate": 1513787036000,
+      "endDate": 1514910236000,
+      "tags": ["Party", "Friends", "Beach" ]
+    }
+]}

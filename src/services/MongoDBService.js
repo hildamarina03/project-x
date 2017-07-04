@@ -53,6 +53,22 @@ class MongoDBService {
     });
   }
 
+  findOneByEmail(entity, mail) {
+    return new Promise((resolve, reject) => {
+      const db = mongo.get();
+
+      db.collection(entity).findOne({
+        username: mail,
+      }).then(item => {
+        if (item) {
+          resolve(item);
+        }else{
+          reject(`No object (${entity}) found`);
+        }
+      });
+    });
+  }
+
   editItem(entity, id, item) {
     return new Promise((resolve, reject) => {
       const db = mongo.get();

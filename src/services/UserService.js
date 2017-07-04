@@ -31,6 +31,11 @@ class UserService {
       .then(() => MongoDBService.findOneById("User", id))
   }
 
+  getUserByEmail(email) {
+    return CheckService.checkString(email, "userEmail", true)
+      .then(() => MongoDBService.findOneByEmail("User", email))
+  }
+
   editUser(params) {
     return this.checkParams(params)
       .then(() => CheckService.checkString(params._id))

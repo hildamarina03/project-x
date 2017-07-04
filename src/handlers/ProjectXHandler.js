@@ -12,30 +12,30 @@ const HelloWorldService = require('../services/HelloWorldService');
 
 const createTrip = (params) => { return TripService.createTrip(params) };
 const createItem = (params) => { return ItemService.createItem(params) };
-const createUser = (params) => { return TagService.createTag(params) };
-const createTag = (params) => { return UserService.createUser(params) };
+const createTag = (params) => { return TagService.createTag(params) };
+const createUser = (params) => { return UserService.createUser(params) };
 const createComment = (params) => { return CommentService.createComment(params) };
 const createLike = (params) => { return LikeService.createLike(params) };
 
 const getTrip = (params) => { return TripService.getTrip(params) };
 const getItem = (params) => { return ItemService.getItem(params) };
-const getUser = (params) => { return TagService.getTag(params) };
-const getTag = (params) => { return UserService.getUser(params) };
+const getTag = (params) => { return TagService.getTag(params) };
+const getUser = (params) => { return UserService.getUser(params) };
 
 const editTrip = (params) => { return TripService.editTrip(params) };
 const editItem = (params) => { return ItemService.editItem(params) };
-const editUser = (params) => { return TagService.editTag(params) };
-const editTag = (params) => { return UserService.editUser(params) };
+const editTag = (params) => { return TagService.editTag(params) };
+const editUser = (params) => { return UserService.editUser(params) };
 
 const deleteTrip = (params) => { return TripService.softDeleteTrip(params) };
 const deleteItem = (params) => { return ItemService.softDeleteItem(params) };
-const deleteUser = (params) => { return TagService.softDeleteTag(params) };
-const deleteTag = (params) => { return UserService.softDeleteUser(params) };
+const deleteTag = (params) => { return TagService.softDeleteTag(params) };
+const deleteUser  = (params) => { return UserService.softDeleteUser(params) };
 
 const listAllTrip = (params) => { return TripService.listAllTrips(params) };
 const listAllItem = (params) => { return ItemService.listAllItems(params) };
-const listAllUser = (params) => { return TagService.listAllTags(params) };
-const listAllTag = (params) => { return UserService.listAllUsers(params) };
+const listAllTag = (params) => { return TagService.listAllTags(params) };
+const listAllUser = (params) => { return UserService.listAllUsers(params) };
 
 const typeService = {
   create: {
@@ -246,6 +246,26 @@ class ProjectXHandler {
         success: {
           objectType: 'comment',
           objects: result
+        }
+      });
+    }, error => {
+      res.status(400).json({
+        error: error
+      });
+    });
+
+  }
+
+  getUserByEmail(req, res) {
+    const
+      userEmail = req.body.email;
+
+    UserService.getUserByEmail(userEmail).then(result => {
+      console.log('getUserByEmail', result);
+      res.json({
+        success: {
+          objectType: 'user',
+          object: result
         }
       });
     }, error => {

@@ -1,0 +1,34 @@
+{
+  "results": [
+    {
+      "id": "1",
+      "username": "carolina@tripquest.com",
+      "name": "Carolina",
+      "lastname": "Ferrer",
+      "password": "1234"
+    },
+
+    {
+      "id": "2",
+      "username": "pedro@tripquest.com",
+      "name": "Pedro",
+      "lastname": "Delmonte",
+      "password": "1234"
+    },
+
+    {
+      "id": "3",
+      "username": "roxanne@tripquest.com",
+      "name": "Roxxxanne",
+      "lastname": "Balit",
+      "password": "1234"
+    },
+
+    {
+      "id": "4",
+      "username": "jeroen@tripquest.com",
+      "name": "Jeroen",
+      "lastname": "Van H",
+      "password": "1234"
+    }
+]}

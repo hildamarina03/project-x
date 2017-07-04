@@ -26,6 +26,10 @@ router
   .get(handler.getUserTrips);
 
 router
+  .route('/functions/getuser')
+  .post(handler.getUserByEmail);
+
+router
   .route('/functions/get/comments/:itemId')
   .get(handler.getItemComments);
 
