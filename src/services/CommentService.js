@@ -3,6 +3,7 @@
 const moment = require('moment');
 const MongoDBService = require('./MongoDBService');
 const ItemService = require('./ItemService');
+const UserService = require('./UserService');
 const CheckService = require('./CheckService');
 const {required, notRequired } = require('.././config');
 const logger = require('../logger');
@@ -11,7 +12,9 @@ const view = (item) => {
   let x;
   return {
     userId: item.userId || x,
-    message: item.message || x
+    message: item.message || x,
+    name: item.name || x,
+    time: item.time
   }
 };
 
@@ -28,7 +31,9 @@ class CommentService {
     logger.verbose('CommentService - createComment', arguments);
     return this.checkParams(params)
       .then(() => ItemService.incrementCommentCounter(params.itemId))
-      .then(() =>  MongoDBService.insertItem("Comment", {
+      .then(() => UserService.getUser(params.userId))
+      .then(user =>  MongoDBService.insertItem("Comment", {
+          name: user.name,
           userId: params.userId,
           message: params.message,
           itemId: params.itemId,
