@@ -152,12 +152,58 @@ const itemImport = () => {
   return Promise.all(promises);
 };
 
+const commentImport = () => {
+  const
+    results = require('./data/Comments.json').results,
+    promises = [],
+    url = 'http://localhost:6600/projectx/functions/create/comment',
+    urlGetUserByEmail = 'http://localhost:6600/projectx/functions/getuser',
+    urlGetItemByTitle = 'http://localhost:6600/projectx/functions/getitem';
+
+  results.forEach(data => {
+    const {
+      id,
+      userEmail,
+      itemTitle
+    } = data;
+
+    delete data.id;
+    delete data.userEmail;
+    delete data.itemTitle;
+    promises.push(new Promise(resolve => {
+
+      makeGetRequest(urlGetUserByEmail, { email: userEmail }).then( user => {
+        data.userId = user.object._id;
+        makeGetRequest(urlGetItemByTitle, { title: itemTitle }).then(item => {
+          data.itemId = item.object._id;
+          makeGetRequest(url, data).then( () => {
+            console.log('created comment', id);
+            resolve();
+          }, () => {
+            console.log('ERROR WHEN CREATING COMMENT', id);
+            resolve();
+          });
+        }, error => {
+          console.log('ERROR WHEN CREATING COMMENT', id, '(problem with item)');
+          resolve();
+        });
+      }, () => {
+        console.log('ERROR WHEN CREATING COMMENT', id, '(problem with user)');
+        resolve();
+      });
+    }));
+  });
+
+  return Promise.all(promises);
+};
+
 
 const importAll = () => {
   return dropAll()
     .then(() => userImport())
     .then(() => tripImport())
-    .then(() => itemImport());
+    .then(() => itemImport())
+    .then(() => commentImport());
 };
 
 importAll().then(() => {

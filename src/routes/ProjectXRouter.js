@@ -33,6 +33,11 @@ router
   .route('/functions/gettrip')
   .post(handler.getTripByTitle);
 
+
+router
+  .route('/functions/getitem')
+  .post(handler.getItemByTitle);
+
 router
   .route('/functions/get/comments/:itemId')
   .get(handler.getItemComments);

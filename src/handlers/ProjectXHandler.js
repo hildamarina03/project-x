@@ -300,6 +300,26 @@ class ProjectXHandler {
 
   }
 
+  getItemByTitle(req, res) {
+    const
+      itemTitle = req.body.title;
+
+    ItemService.getItemByTitle(itemTitle).then(result => {
+      console.log('getTripByTitle', result);
+      res.json({
+        success: {
+          objectType: 'item',
+          object: result
+        }
+      });
+    }, error => {
+      res.json({
+        error: error
+      });
+    });
+
+  }
+
   login(req, res) {
     const
       username = req.body.username,

@@ -1,0 +1,22 @@
+{
+  "results": [
+    {
+      "id": "1",
+      "userEmail": "pedro@tripquest.com",
+      "itemTitle": "The Duomo & Battistero di San Giovanni",
+      "message": "Looks interesting. Love it!"
+    },
+    {
+      "id": "2",
+      "userEmail": "roxanne@tripquest.com",
+      "itemTitle": "The Duomo & Battistero di San Giovanni",
+      "message": "I think is a little expensive and overrated"
+    },
+
+    {
+      "id": "3",
+      "userEmail": "jeroen@tripquest.com",
+      "itemTitle": "The Duomo & Battistero di San Giovanni",
+      "message": "We have to do it"
+    }
+]}

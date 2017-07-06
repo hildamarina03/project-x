@@ -147,6 +147,11 @@ class ItemService {
       })
   }
 
+  getItemByTitle(title) {
+    return CheckService.checkString(title, "title", required)
+      .then(() => MongoDBService.findOneByTitle("Item", title))
+  }
+
   listAllItems() {
     return MongoDBService.findAll("Item")
   }

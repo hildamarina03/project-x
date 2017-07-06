@@ -2,83 +2,116 @@
   "results": [
     {
       "id": "1",
-      "location": "Barcelona, Spain",
+      "location": "Florence, Italy",
       "userEmail": "carolina@tripquest.com",
       "tripTitle": "BTS Graduation Trip",
-      "startDate": 1497284636000,
-      "tags": ["Hotel"],
+      "startDate": 1499682636000,
+      "endDate": 1500114636000,
+      "tags": ["Hotel", "Big Rooms"],
       "title": "Hotel The Starts",
-      "description": "This is a cool place to sleep",
+      "description": "5 Rooms for 4 People",
       "price": 1200,
-      "multipleDays": false
+      "multipleDays": true
     },
 
     {
       "id": "2",
-      "location": "Barcelona, Spain",
+      "location": "Florence, Italy",
       "userEmail": "carolina@tripquest.com",
       "tripTitle": "BTS Graduation Trip",
-      "startDate": 1497371036000,
-      "tags": ["Dinner", "Mexican", "Restaurant"],
-      "title": "Taco Starts",
-      "description": "This is a cool place to eat",
-      "price": 50,
+      "startDate": 1499689836000,
+      "tags": ["guided tour", "church", "duomo", "large group", "cupola"],
+      "title": "The Duomo & Battistero di San Giovanni",
+      "description": "Guided tour to both amazing places. Tickets included for 20 people. Cupola access included",
+      "price": 700,
+      "imageURL": "https://s-media-cache-ak0.pinimg.com/originals/b4/74/3a/b4743a57601eaa80343944702a76ee38.jpg",
       "multipleDays": false
     },
 
     {
       "id": "3",
-      "location": "Barcelona, Spain",
+      "location": "Florence, Italy",
       "userEmail": "carolina@tripquest.com",
       "tripTitle": "BTS Graduation Trip",
-      "startDate": 1497457436000,
-      "tags": ["tour"],
-      "title": "Sagrada Familia",
-      "description": "This is a cool place to visit",
+      "startDate": 1499689836000,
+      "tags": ["guided tour"],
+      "title": "- Mercato del Porcellino",
+      "imageURL": "http://madtrip.co/uploads/photos/1433511652-0d80fb9c01dd329c8082421ee7100e54.jpg",
+      "description": "Guided tour and free time to look around.",
       "price": 15,
       "multipleDays": false
     },
 
     {
       "id": "4",
-      "location": "Barcelona, Spain",
+      "location": "Florence, Italy",
       "userEmail": "carolina@tripquest.com",
       "tripTitle": "BTS Graduation Trip",
-      "startDate": 1497543836000,
-      "tags": ["tour", "wow"],
-      "title": "La Pedrera",
-      "description": "This is a cool place to visit. Wow!",
-      "price": 25,
-      "multipleDays": false
-    },
-
-    {
-      "id": "5",
-      "location": "Barcelona, Spain",
-      "userEmail": "carolina@tripquest.com",
-      "tripTitle": "BTS Graduation Trip",
-      "startDate": 1500222236000,
-      "tags": ["Walk", "Tour"],
-      "title": "Walking in Barcelona",
-      "description": "Guided tour of Raval, Ramlbas, Gothic and Borne",
+      "imageURL": "http://www.allanticovinaio.com/cms-admin/materiale/gallerie/img-1-max.jpg",
+      "startDate": 1499675436000,
+      "tags": ["Restaurant", "big groups", "wine"],
+      "title": "All Antico Vinaio",
+      "description": "Nice cheap restaurant. Fixed menu of main dish, second dish, dessert and wine.",
       "price": 250,
       "multipleDays": false
     },
 
     {
-      "id": "1",
-      "location": "Barcelona, Spain",
+      "id": "5",
+      "location": "Florence, Italy",
       "userEmail": "carolina@tripquest.com",
       "tripTitle": "BTS Graduation Trip",
-      "startDate": 1500827036000,
-      "tags": ["tour", "rock climbing"],
-      "title": "Montserrat",
-      "description": "Cool full day tour",
-      "price": 600,
+      "startDate": 1499761836000,
+      "tags": ["guided tour", "treking"],
+      "title": "Day tour to Palazzo Pitti. Were confi clothes.",
+      "description": "Lots of walking",
+      "price": 550,
+      "imageURL": "http://www.wtg-global.net/wp-content/uploads/2016/02/fig1.jpg",
+      "multipleDays": false
+    },
+
+    {
+      "id": "6",
+      "location": "Florence, Italy",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1499848236000,
+      "tags": ["Restaurant", "big groups", "sandwiches"],
+      "imageURL": "https://static.wixstatic.com/media/60dd7b_96819820c4ea4a4d8d5c48ff627c4abb~mv2_d_1944_1592_s_2.png/v1/fill/w_348,h_280,al_c,usm_0.66_1.00_0.01/60dd7b_96819820c4ea4a4d8d5c48ff627c4abb~mv2_d_1944_1592_s_2.png",
+      "description": "Cheap place!",
+      "price": 300,
+      "title": "SandwiChic Dinner",
+      "multipleDays": false
+    },
+    {
+      "id": "8",
+      "location": "Florence, Italy",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate": 1500021036000,
+      "tags": ["guided tour", "fast-pass", "museum"],
+      "title": "Galleria della Academia",
+      "description": "Paintings and sculptures. Michelangelo's famous David!",
+      "price": 400,
+      "imageURL": "http://www.shore2shore.es/static/media/s2s/excursions/images/florencia5.jpg",
+      "multipleDays": false
+    },
+
+    {
+      "id": "9",
+      "location": "Florence, Italy",
+      "userEmail": "carolina@tripquest.com",
+      "tripTitle": "BTS Graduation Trip",
+      "startDate":1500107436000,
+      "tags": ["guided tour", "bridge"],
+      "title": "Ponte Vecchio",
+      "description": "Amazing walking tour from Ponte Vecchio to best the best view of the World.",
+      "price": 400,
+      "imageURL": "https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Panorama_of_the_Ponte_Vecchio_in_Florence%2C_Italy.jpg/1024px-Panorama_of_the_Ponte_Vecchio_in_Florence%2C_Italy.jpg",
       "multipleDays": false
     }
 
-]}
+  ]}
 
 
 
