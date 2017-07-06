@@ -132,6 +132,7 @@ class ItemService {
       .then(item => {
         item.numberOfComments = item.numberOfComments || 0;
         item.numberOfComments = item.numberOfComments + 1;
+        item.active = true;
         return MongoDBService.editItem("Item", id, item)
       })
   }
@@ -143,6 +144,7 @@ class ItemService {
       .then(item => {
         item.numberOfLikes = item.numberOfLikes || 0;
         item.numberOfLikes = item.numberOfLikes + 1;
+        item.active = true;
         return MongoDBService.editItem("Item", id, item)
       })
   }

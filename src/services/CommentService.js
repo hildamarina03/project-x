@@ -30,7 +30,7 @@ class CommentService {
   createComment(params) {
     logger.verbose('CommentService - createComment', arguments);
     return this.checkParams(params)
-      // .then(() => ItemService.incrementCommentCounter(params.itemId))
+      .then(() => ItemService.incrementCommentCounter(params.itemId))
       .then(() => UserService.getUser(params.userId))
       .then(user =>  MongoDBService.insertItem("Comment", {
           name: user.name,
