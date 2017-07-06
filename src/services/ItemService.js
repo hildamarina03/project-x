@@ -22,7 +22,8 @@ const view = (item) => {
     numberOfLikes: item.numberOfLikes || x,
     multipleDays: item.multipleDays || x,
     time: item.time || x,
-    userId: item.userId || x
+    userId: item.userId || x,
+    tripId: item.tripId || x
   }
 };
 
