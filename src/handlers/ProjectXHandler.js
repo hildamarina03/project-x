@@ -114,7 +114,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -134,7 +134,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -154,7 +154,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -173,7 +173,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -193,7 +193,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -213,7 +213,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -233,7 +233,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -253,7 +253,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -273,7 +273,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -293,7 +293,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -307,7 +307,7 @@ class ProjectXHandler {
 
     UserService.login(username, password).then(result => {
       if(result === 'Invalid username or password'){
-        res.status(400).json({
+        res.json({
           error: result
         });
       }
@@ -318,7 +318,7 @@ class ProjectXHandler {
         }
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
@@ -334,7 +334,7 @@ class ProjectXHandler {
         success: result
       });
     }, error => {
-      res.status(400).json({
+      res.json({
         error: error
       });
     });
