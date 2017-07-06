@@ -113,7 +113,7 @@ class MongoDBService {
 
   findAllByTripId(entity, tripId, params) {
     return new Promise(resolve => {
-      const sort = params.sortBy || '_id';
+      const sort = params.sortBy || 'startDate';
       let query = {
         tripId: tripId,
         active: true
